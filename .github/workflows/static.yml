@@ -30,9 +30,9 @@ jobs:
       - name: Display output URL
         run: echo ${{ steps.deployment.outputs.page_url }}
 
-      - name: Create build folder
+      - name: Create registry folder
         run: |
-          mkdir build
+          mkdir public
 
       - name: Getting .json
         uses: wei/wget@v1
@@ -46,7 +46,7 @@ jobs:
         uses: actions/upload-pages-artifact@v3
         with:
           name: production-files
-          path: './build'
+          path: './public'
 
   # Single deploy job since we're just deploying
   deploy:
@@ -55,18 +55,10 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
       
     runs-on: ubuntu-latest
-    steps:
-      - name: Create public folder
-        run: |
-          mkdir public
-          
+    steps:         
       - name: Download artifact
         uses: actions/upload-pages-artifact@v3
-        with:
-          name: production-files
-          path: './public'
+          
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
-        with:
-          publish_dir: './public'
