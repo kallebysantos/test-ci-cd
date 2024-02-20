@@ -37,7 +37,7 @@ jobs:
       - name: Getting .json
         uses: wei/wget@v1
         with:
-          args: -O build/button.json https://raw.githubusercontent.com/kallebysantos/pango-ui/HEAD/src/Pango.Components/UI/Button/Button.razor.json
+          args: -O public/button.json https://raw.githubusercontent.com/kallebysantos/pango-ui/HEAD/src/Pango.Components/UI/Button/Button.razor.json
         
       - name: Setup Pages
         uses: actions/configure-pages@v4
