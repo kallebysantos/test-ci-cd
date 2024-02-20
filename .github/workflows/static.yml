@@ -32,12 +32,12 @@ jobs:
 
       - name: Create registry folder
         run: |
-          mkdir public
+          mkdir _site
 
       - name: Getting .json
         uses: wei/wget@v1
         with:
-          args: -O public/button.json https://raw.githubusercontent.com/kallebysantos/pango-ui/HEAD/src/Pango.Components/UI/Button/Button.razor.json
+          args: -O _site/button.json https://raw.githubusercontent.com/kallebysantos/pango-ui/HEAD/src/Pango.Components/UI/Button/Button.razor.json
         
       - name: Setup Pages
         uses: actions/configure-pages@v4
@@ -46,7 +46,7 @@ jobs:
         uses: actions/upload-pages-artifact@v3
         with:
           name: production-files
-          path: './public'
+          path: './_site'
 
   # Single deploy job since we're just deploying
   deploy:
