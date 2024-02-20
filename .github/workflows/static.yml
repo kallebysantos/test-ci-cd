@@ -30,14 +30,14 @@ jobs:
       - name: Display output URL
         run: echo ${{ steps.deployment.outputs.page_url }}
 
-      - name: Create public distribution
+      - name: Create build folder
         run: |
-          mkdir public
+          mkdir build
 
       - name: Getting .json
         uses: wei/wget@v1
         with:
-          args: -O public/button.json https://raw.githubusercontent.com/kallebysantos/pango-ui/HEAD/src/Pango.Components/UI/Button/Button.razor.json
+          args: -O build/button.json https://raw.githubusercontent.com/kallebysantos/pango-ui/HEAD/src/Pango.Components/UI/Button/Button.razor.json
         
       - name: Setup Pages
         uses: actions/configure-pages@v4
@@ -46,7 +46,7 @@ jobs:
         uses: actions/upload-pages-artifact@v3
         with:
           name: production-files
-          path: './public'
+          path: './build'
 
   # Single deploy job since we're just deploying
   deploy:
@@ -56,6 +56,10 @@ jobs:
       
     runs-on: ubuntu-latest
     steps:
+      - name: Create public folder
+        run: |
+          mkdir public
+          
       - name: Download artifact
         uses: actions/upload-pages-artifact@v3
         with:
